@@ -40,3 +40,22 @@ def searchDict(dict, value):
     return 'The value does not exist'
 
 print(searchDict(my_dict3, 27))
+
+print('Deleting an element from a dictionary')
+
+del my_dict3['age']
+print(my_dict3)
+
+
+removed_element = my_dict3.pop('address')
+print(removed_element)
+print(my_dict3)
+
+print(eng_sp)
+print(eng_sp.popitem())
+print(eng_sp)
+
+
+print(eng_sp2)
+eng_sp2.clear()
+print(eng_sp2)
