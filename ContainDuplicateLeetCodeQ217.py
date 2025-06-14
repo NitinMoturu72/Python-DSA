@@ -41,3 +41,8 @@ def containsDuplicate(nums):
             else:
                 seen.add(i)
         return False
+
+
+# While iterating through the array, Use a Set() to track the elements we have seen so far. 
+# If we encounter an element that is already in the set, we return True. 
+# If we finish iterating through the list without finding any duplicates, we return False.
