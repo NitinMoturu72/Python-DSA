@@ -52,4 +52,26 @@ def isAnagram(self, s: str, t: str) -> bool:
 # Sorting: If length of s and t are not equal, they cannot be anagrams.
 # If we sort both strings and they are equal, then t is an anagram of s.  
 # Time complexity: O(N log N), where N is the length of the string.
-# Space complexity: O(N), since we are using extra space for sorting.  
+# Space complexity: O(1), since we are not using any extra space that grows with input size.  
+
+
+
+def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        countS, countT = {}, {}
+
+        for i in range(len(s)):
+            countS[s[i]] = 1 + countS.get(s[i],0)
+            countT[t[i]] = 1 + countT.get(t[i],0)
+        for  c in countS:
+            if countS[c] != countT.get(c,0):
+                return False
+        return True
+
+
+# HashMap: If length of s and t are not equal, they cannot be anagrams.
+# We use a hashmap to count the frequency of each character in both strings.
+# If the frequency of each character in s matches the frequency in t, then t is an anagram of s.
+# Time complexity: O(N), where N is the length of the string.
+# Space complexity: O(N), since we are using a 2 hashmap of size N.
