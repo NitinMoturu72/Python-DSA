@@ -46,3 +46,29 @@ def topKFrequent(self, nums: List[int], k: int) -> List[int]:
 # Extract the keys of the sorted dictionary and return the first k elements.
 # Time complexity O(n log n) due to sorting, where n is the number of distinct elements in nums.
 # Space complexity O(n) for storing the frequency count in a dictionary.
+
+
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = {}
+        freq =[[] for i in range(len(nums)+1)]
+
+        for i in nums:
+            count[i] = 1 + count.get(i, 0)
+        # print(count)
+        for i, c in count.items():
+            freq[c].append(i)
+        
+        res =[]
+        for i in range(len(freq)-1, 0, -1):
+            for j in freq[i]:
+                res.append(j)
+                if len(res) == k:
+                    return res
+                
+# Bucket sort solution:
+# Count the frequency of each element in the array using a dictionary.
+# Create a list of empty lists (buckets) where the index represents the frequency. This will ensure the size of the list is len(nums) + 1.
+# For each unique element, append it to the corresponding bucket based on its frequency.
+# Iterate through the buckets in reverse order and collect elements until we have k elements.
+# Time complexity O(n), where n is the number of elements in nums.
+# Space complexity O(n) for storing the frequency count in a dictionary and the buckets.  
