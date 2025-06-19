@@ -49,3 +49,32 @@ def isValidSudoku(self, board: List[List[str]]) -> bool:
 # Box Check: For each of the nine 3x3 boxes, we check for duplicates in the same way as above.
 # Time Complexity: O(n^2), where n is the number of cells in the board (81 for a 9x9 board).
 # Space Complexity: O(1), since we are using a constant amount of extra space for the sets.
+
+
+def isValidSudoku(self, board: List[List[str]]) -> bool:
+        rows = defaultdict(set)
+        cols = defaultdict(set)
+        box = defaultdict(set)
+
+        for r in range(len(board)):
+            for c in range(len(board)):
+                if board[r][c] == '.':
+                    continue
+                
+                if (board[r][c] in rows[r] or 
+                    board[r][c] in cols[c] or 
+                    board[r][c] in box[(r//3, c//3)]):
+                    return False
+                
+                cols[c].add(board[r][c])
+                rows[r].add(board[r][c])
+                box[(r//3, c//3)].add(board[r][c])
+        return True
+
+# Hash sets approach:
+# We use three hash sets to keep track of the numbers seen in each row, column, and 3x3 box.
+# For each cell in the board, we check if the number is already in the corresponding row, column, or box set.
+# If it is, we return False. Otherwise, we add the number to the respective sets
+# If theboard passes all checks, we return True.
+# Time Complexity: O(n^2), where n is the number of cells in the board (81 for a 9x9 board).
+# Space Complexity: O(1), since we are using a constant amount of extra space for the sets, which is bounded by the number of unique numbers (1-9).
