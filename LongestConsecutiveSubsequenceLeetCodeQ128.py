@@ -26,10 +26,7 @@
 def longestConsecutive(self, nums: List[int]) -> int:   
     if len(nums) == 0:
             return 0
-    s = set()
-    for i in nums:
-        if i not in s:
-            s.add(i)
+    s = set(nums)
     l = list(s)
     print(s)
     l.sort()
@@ -58,3 +55,25 @@ def longestConsecutive(self, nums: List[int]) -> int:
 # finally return the max count.
 # Time Complexity: O(n log n) due to sorting, where n is the number of unique elements in the input list.
 # Space Complexity: O(n) for the set to store unique elements.
+
+
+
+def longestConsecutive(self, nums: List[int]) -> int:
+    numset = set(nums)
+    longest =0
+
+    for n in numset:
+        if(n-1) not in numset:
+            length = 0
+            while(n+length) in numset:
+                length += 1
+            longest = max(length, longest)
+    return longest
+
+# Hash Set Approach:
+# This approach uses a hash set to store the elements of the array.
+# It iterates through each element and checks if it is the start of a consecutive sequence (i.e., if the previous number is not in the set).
+# If it is, it counts the length of the consecutive sequence by checking how many numbers are present in the set starting from that number.
+# else resets the length to 1.
+# Time compilexity: O(n), where n is the number of elements in the input list.
+# Space complexity: O(n) for the hash set to store the elements.
