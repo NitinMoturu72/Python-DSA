@@ -49,3 +49,28 @@ class Solution:
 # Compare characters from both ends of the string, moving towards the center.
 # if the characters at the two pointers are not equal, return False.
 # If all characters match, return True.
+
+
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        left = 0
+        right = len(s)-1
+        while (left < right):
+            while left < right and not self.check(s[left]):
+                left += 1
+            
+            while left < right and not self.check(s[right]):
+                right -= 1
+
+            if s[left].lower() != s[right].lower():
+                return False
+            
+            left += 1
+            right -= 1
+        
+        return True
+    
+    def check (self, c):
+        return (ord('A') <= ord(c) <= ord('Z') or
+                ord('a') <= ord(c) <= ord('z') or
+                ord('0') <= ord(c) <= ord('9'))
