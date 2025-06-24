@@ -52,3 +52,41 @@ class Solution:
 # It checks if the sum of the triplet is zero and ensures that the triplet is not already in the result list to avoid duplicates.
 # Time Complexity: O(n^3)
 # Space Complexity: O(n)
+
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+        for i in range(len(nums)-2):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+
+            l = i+1
+            r = len(nums) - 1
+            while l < r:
+                # print(i,l,r)
+                threeSum = nums[i] + nums[l] + nums[r]
+                if threeSum == 0:
+                    res.append([nums[i], nums[l], nums[r]])
+                    l += 1
+                    while nums[l] == nums[l-1] and l < r:
+                        l += 1
+                elif threeSum < 0:
+                    l += 1
+                elif threeSum > 0:
+                    r -= 1
+        return res
+
+
+# 2 Pointers:
+# This solution uses a two-pointer technique after sorting the array.
+# It iterates through the array and uses two pointers to find pairs that, together with the current element, sum to zero.
+# We skip duplicates to ensure unique triplets by checking if the current element is the same as the previous one while iterating.
+# while the left pointer is less than the right pointer, it checks the sum of the triplet.
+# if the sum is zero, it adds the triplet to the result and moves both pointers inward(left) while skipping duplicates.
+# if the sum is less than zero, it moves the left pointer to the right to increase the sum.
+# if the sum is greater than zero, it moves the right pointer to the left to decrease the sum.
+# returns the list of unique triplets that sum to zero.
+# Time Complexity: O(n^2)
+# Space Complexity: O(n)
