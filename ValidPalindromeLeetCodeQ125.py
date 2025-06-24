@@ -49,6 +49,8 @@ class Solution:
 # Compare characters from both ends of the string, moving towards the center.
 # if the characters at the two pointers are not equal, return False.
 # If all characters match, return True.
+# Time Complexity: O(n)
+# Space Complexity: O(1) if we ignore the space used by the regex operation, otherwise O(n) for the new string created by re.sub.
 
 
 class Solution:
@@ -74,3 +76,16 @@ class Solution:
         return (ord('A') <= ord(c) <= ord('Z') or
                 ord('a') <= ord(c) <= ord('z') or
                 ord('0') <= ord(c) <= ord('9'))
+    
+# 2 pointers:
+# Create a helper function to check if a character is alphanumeric.
+# The aplhanumeric characters are defined as letters (A-Z, a-z) and numbers (0-9). 
+# The helper function checks if the character falls within the ASCII range of alphanumeric characters.
+# Initialize two pointers, one at the start (left) and one at the end (right) of the string.
+# Move the left pointer to the right until it points to an alphanumeric character.  
+# Move the right pointer to the left until it points to an alphanumeric character.
+# Compare characters from both ends of the string, moving towards the center.
+# If the characters at the two pointers are not equal, return False.
+# If all characters match, return True.
+# Time Complexity: O(n)
+# Space Complexity: O(1) since we are not using any extra space for the string.
