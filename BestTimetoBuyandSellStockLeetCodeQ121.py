@@ -26,6 +26,24 @@
 # 0 <= prices[i] <= 100
 
 
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        max_profit = 0
+
+        for i in range(len(prices)-1):
+            for j in range(i+1, len(prices)):
+                profit = prices[j] - prices[i]
+                max_profit = max(max_profit, profit)
+
+        return max_profit
+
+# BruteForce Solution:
+# This solution uses two nested loops to check all pairs of days.
+# It calculates the profit for each pair and keeps track of the maximum profit found.
+# Time Complexity: O(n^2)
+# Space Complexity: O(1)
+
+
 def maxProfit(prices):
     l, r = 0,1
     maxprofit = 0
@@ -42,6 +60,12 @@ def maxProfit(prices):
     
     return maxprofit
 
+# Two Pointer Solution:
+# This solution uses two pointers, one at the start and one at the next day.
+# It checks if the price on the right pointer is greater than the price on the left pointer.
+# If it is, it calculates the profit and updates the maximum profit if necessary.
+# If the price on the right pointer is less than or equal to the price on the left pointer, it moves the left pointer to the right.
+# This way, it ensures that it always considers the maximum possible profit while iterating through the prices.
 # Time Complexity: O(n)
 
 # Space Complexity: O(1)
