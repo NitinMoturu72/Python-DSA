@@ -68,3 +68,58 @@ class Solution:
 # Finally, we return the substring if found, otherwise an empty string.
 # Time Complexity: O(n^2 * m), where n is the length of s and m is the length of t.
 # Space Complexity: O(m), where m is the length of t, for the countT dictionary.
+
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        if t == "":
+            return ""
+        # Dictionaries to store count and current window's character frequencies
+        countT, window = {}, {} 
+        # Count frequency of each character in t
+        for c in t:
+            countT[c] = 1 + countT.get(c,0)
+        # `have`: number of characters meeting their required frequency in window
+        # `need`: total number of unique characters needed from t
+        have, need = 0, len(countT)
+        # `res` stores the start and end indices of the best window found
+        # `resLen` stores its length (initialized to infinity for comparison)
+        res, reslen = [-1, -1], float("infinity")
+        # Left pointer
+        l = 0
+
+        # Step 2: Expand the window using the right pointer
+        for r in range(len(s)):
+            # Add current character to the window count
+            c = s[r]
+            window[c] = 1 + window.get(c,0)
+            # If this character is needed and its count matches the target count, increment `have`
+            if c in countT and window[c] == countT[c]:
+                have += 1
+            # Step 3: Try to shrink the window while all required characters are present
+            while have == need:
+                # Update result if this window is smaller than previously recorded best
+                if (r-l+1) < reslen:
+                    res = [l,r]
+                    reslen = (r-l+1)
+                # Now, shrink the window from the left
+                window[s[l]] -= 1
+                # If a required character falls below its target count, reduce `have`
+                if s[l] in countT and window[s[l]] < countT[s[l]]:
+                    have -= 1
+
+                # update the left pointer
+                l += 1
+        # Step 4: Return the smallest valid window substring found, or "" if none exists
+        l, r = res
+        return s[l:r+1] if reslen != float("infinity") else ""
+
+
+# Sliding Window Solution:
+# This solution uses a sliding window approach to efficiently find the minimum window substring.
+# It uses the right pointer to expand the window by including characters from s.
+# It maintains a count of characters in the current window and checks if it meets the requirements of the target string t.
+# If the current window contains all characters from t with the required frequency, 
+# it attempts to shrink the window from the left to find the minimum length substring.
+# Time Complexity: O(n + m), where n is the length of s and m is the length of t.
+# Space Complexity: O(m), where m is the length of t, for the countT and window dictionaries.
