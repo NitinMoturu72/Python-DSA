@@ -43,3 +43,27 @@ class Solution:
 # The process continues until curr becomes None, at which point prev will be the new head of the reversed list.
 # Time complexity is O(n) where n is the number of nodes in the list,
 # Space complexity is O(1) since we are using a constant amount of extra space.
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return None
+        
+        newhead = head
+        if head.next:
+            newhead = self.reverseList(head.next)
+            head.next.next = head
+        
+        head.next = None
+        return newhead
+    
+# Revursive Solution:
+# This solution uses recursion to reverse the linked list.
+# The base case is when the head is None or when there is only one node (head.next is None).
+# We return None in that case.
+# Otherwise, we recursively call reverseList on the next node.
+# After the recursive call, we set the next node's next pointer to the current head,
+# effectively reversing the link.
+# Finally, we set the current head's next pointer to None to avoid cycles.
+# Time complexity is O(n) where n is the number of nodes in the list,
+# Space complexity is O(n) due to the recursive call stack.
